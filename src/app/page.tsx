@@ -1,7 +1,5 @@
+import { Desktop } from '@/components/desktop/Desktop';
+
 export default function Home() {
-  return (
-    <main>
-      <div>Hello world!</div>
-    </main>
-  );
+  return <Desktop />;
 }

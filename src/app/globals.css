@@ -1,1 +1,111 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-geist-mono), "SF Mono", monospace;
+
+  /* macOS Dark Palette - HSL based */
+  --color-mac-bg: hsl(225 12% 7%);
+  --color-mac-surface: hsl(225 12% 12%);
+  --color-mac-elevated: hsl(225 12% 16%);
+  
+  --color-glass-bg: rgba(30, 30, 40, 0.72);
+  --color-glass-bg-heavy: rgba(30, 30, 40, 0.88);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-border-light: rgba(255, 255, 255, 0.18);
+  
+  --color-traffic-close: hsl(0 80% 67%);
+  --color-traffic-minimize: hsl(42 90% 58%);
+  --color-traffic-maximize: hsl(140 55% 52%);
+  
+  --color-accent: hsl(211 100% 50%);
+  --color-accent-hover: hsl(211 100% 45%);
+  
+  --color-text-primary: hsl(0 0% 95%);
+  --color-text-secondary: hsl(0 0% 68%);
+  --color-text-tertiary: hsl(0 0% 45%);
+  
+  --radius-window: 12px;
+  --radius-dock: 22px;
+  --radius-icon: 14px;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--color-mac-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Custom Scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+@layer components {
+  .mac-glass {
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--color-glass-border);
+  }
+
+  .mac-glass-heavy {
+    background: var(--color-glass-bg-heavy);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid var(--color-glass-border-light);
+  }
+
+  .mac-shadow {
+    box-shadow:
+      0 24px 80px rgba(0, 0, 0, 0.45),
+      0 8px 24px rgba(0, 0, 0, 0.3),
+      0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .mac-shadow-dock {
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.35),
+      0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

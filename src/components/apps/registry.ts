@@ -19,7 +19,7 @@ export const APP_REGISTRY: AppDefinition[] = [
     id: 'skills',
     title: 'Skills.txt',
     defaultSize: { width: 440, height: 480 },
-    defaultPosition: { x: 180, y: 220 },
+    defaultPosition: { x: 180, y: 250 },
     minSize: { width: 360, height: 300 },
     component: SkillsApp,
   },

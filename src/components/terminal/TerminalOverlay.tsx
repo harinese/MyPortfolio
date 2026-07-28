@@ -325,7 +325,7 @@ export const TerminalOverlay: React.FC = () => {
           {history.map((log) => {
             if (log.id === 'init-welcome') {
               return (
-                <div key={log.id} className="space-y-3 text-xs pb-3 border-b border-emerald-500/20">
+                <div key={log.id} className="space-y-2 text-xs pb-2 border-b border-emerald-500/20">
                   <pre className="text-emerald-400 font-bold leading-none hidden sm:block">
                     {`  _   _            _    ____        _            ____    ____  
  | | | | __ _ _ __(_)  | __ )  __ _| |__  _   _  / ___|  |  _ \\ 
@@ -336,39 +336,8 @@ export const TerminalOverlay: React.FC = () => {
                   <p className="text-cyan-400 font-bold text-sm">
                     Portfolio-OS Interactive Shell [v2.4]
                   </p>
-                  
-                  {/* Auto-printed Available Commands List */}
-                  <div className="space-y-1.5 text-xs text-emerald-300/90 my-1 bg-white/[0.03] p-3 rounded-lg border border-emerald-500/20">
-                    <p className="text-emerald-400 font-bold tracking-wide">AVAILABLE COMMANDS:</p>
-                    <div className="grid grid-cols-[120px_1fr] gap-x-4 gap-y-1 font-mono">
-                      <span className="text-cyan-400 font-semibold cursor-pointer hover:underline" onClick={() => handleCommand('about')}>about</span>
-                      <span>Display Hari's bio &amp; background info</span>
-
-                      <span className="text-cyan-400 font-semibold cursor-pointer hover:underline" onClick={() => handleCommand('skills')}>skills</span>
-                      <span>List tech arsenal (Python, React, Next.js, Flask, etc.)</span>
-
-                      <span className="text-cyan-400 font-semibold cursor-pointer hover:underline" onClick={() => handleCommand('projects')}>projects</span>
-                      <span>List all 7 deployed flagship &amp; freelance projects</span>
-
-                      <span className="text-cyan-400 font-semibold cursor-pointer hover:underline" onClick={() => handleCommand('certs')}>certs</span>
-                      <span>List hackathon credentials &amp; certifications</span>
-
-                      <span className="text-cyan-400 font-semibold cursor-pointer hover:underline" onClick={() => handleCommand('contact')}>contact</span>
-                      <span>Print email, LinkedIn, GitHub, X, Instagram links</span>
-
-                      <span className="text-cyan-400 font-semibold cursor-pointer hover:underline" onClick={() => handleCommand('resume')}>resume</span>
-                      <span>Open Hari's official Resume (PDF)</span>
-
-                      <span className="text-cyan-400 font-semibold cursor-pointer hover:underline" onClick={toggleCliMode}>gui / exit</span>
-                      <span>Return to GUI Desktop mode</span>
-
-                      <span className="text-cyan-400 font-semibold cursor-pointer hover:underline" onClick={clearHistory}>clear / cls</span>
-                      <span>Clear terminal output buffer</span>
-                    </div>
-                  </div>
-
-                  <p className="text-white/70 text-[11px]">
-                    Type any command above or click on it directly. Type <span className="text-emerald-400 font-bold underline cursor-pointer" onClick={toggleCliMode}>gui</span> to return to Desktop mode.
+                  <p className="text-white/70">
+                    Type <span className="text-cyan-400 font-bold underline cursor-pointer" onClick={() => handleCommand('help')}>help</span> to view commands, or type <span className="text-emerald-400 font-bold underline cursor-pointer" onClick={toggleCliMode}>gui</span> to return to Desktop mode.
                   </p>
                 </div>
               );

@@ -19,8 +19,23 @@ interface WindowStore {
   getActiveWindows: () => WindowState[];
 }
 
-// Uses clean static pixel coordinates from src/components/apps/registry.ts for easy editing!
-function getPosition(defaultPos: WindowPosition): WindowPosition {
+function getResponsivePosition(appId: AppId, defaultPos: WindowPosition, defaultSize: WindowSize): WindowPosition {
+  if (typeof window === 'undefined') return defaultPos;
+  const w = window.innerWidth;
+
+  if (appId === 'skills') {
+    return { x: Math.max(90, Math.floor(w * 0.07)), y: 220 };
+  }
+  if (appId === 'about') {
+    return { x: Math.floor((w - defaultSize.width) / 2), y: 40 };
+  }
+  if (appId === 'photo') {
+    const photoX = Math.floor(w * 0.61);
+    return { x: Math.min(w - defaultSize.width - 30, Math.max(photoX, 850)), y: 40 };
+  }
+  if (appId === 'chat') {
+    return { x: Math.floor((w - defaultSize.width) / 2), y: 50 };
+  }
   return defaultPos;
 }
 
@@ -31,7 +46,7 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
   openApp: (appId, title, defaultSize, defaultPosition) => {
     const { windows, nextZIndex } = get();
     const existing = windows.find((w) => w.appId === appId);
-    const pos = getPosition(defaultPosition);
+    const pos = getResponsivePosition(appId, defaultPosition, defaultSize);
 
     if (existing) {
       if (existing.isMinimized) {
@@ -69,7 +84,7 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
   toggleApp: (appId, title, defaultSize, defaultPosition) => {
     const { windows, nextZIndex } = get();
     const existing = windows.find((w) => w.appId === appId);
-    const pos = getPosition(defaultPosition);
+    const pos = getResponsivePosition(appId, defaultPosition, defaultSize);
 
     if (existing) {
       if (existing.isMinimized) {
@@ -138,7 +153,7 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
       const appDef = APP_REGISTRY.find((a) => a.id === appId);
       if (!appDef) continue;
 
-      const pos = getPosition(appDef.defaultPosition);
+      const pos = getResponsivePosition(appId, appDef.defaultPosition, appDef.defaultSize);
       const existingIndex = updatedWindows.findIndex((w) => w.appId === appId);
 
       if (existingIndex !== -1) {
